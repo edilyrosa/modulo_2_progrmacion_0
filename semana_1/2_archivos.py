@@ -60,3 +60,50 @@ except Exception as e:
 # No puedes usar with para borrar archivos o directorios. with es un manejador de contexto 
 # que se usa para abrir y cerrar recursos automáticamente (archivos, conexiones, etc.). 
 # Para eliminar archivos y directorios se usan funciones del módulo os y shutil, que no se integran con with.
+
+import os
+ruta_archivo = "no_existe.py"
+try:
+    os.remove("no_existe.py")
+    print(f"Archivo eliminado {ruta_archivo}")
+except FileNotFoundError:
+    print(f"El archivo {ruta_archivo} no existe, no se puede eliminar.")
+except PermissionError:
+    print('No tienes permisos para eliminar/acc a este archivo.')
+    
+    
+#* ✅ if os.path.exists("archivo.txt"): #metodo bool(object)
+#     os.remove("archivo.txt")
+#     print("Archivo eliminado")
+# else:
+#     print("El archivo no existe")
+
+
+#! Borrar una carpeta vacía: os.rmdir(ruta_carpeta_eliminar)
+ruta_carpeta_vacia = 'subcarpeta'
+try:
+    os.rmdir(ruta_carpeta_vacia)
+    print(f"Directorio eliminado {ruta_carpeta_vacia}")
+except FileNotFoundError: # es para file y directorios
+    print(f"El carpera {ruta_carpeta_vacia} no existe, no se puede eliminar.")
+except PermissionError:
+    print('No tienes permisos para eliminar/acc a esta acrpeta.')
+except OSError as e: # OSError es para errores relacionados con el sistema operativo, como intentar eliminar un directorio que no está vacío.
+    print('La carpeta que intentas eliminar no esta vacia.')
+
+
+
+import shutil
+ruta_carpeta_vacia_c = 'test'
+try:
+    shutil.rmtree(ruta_carpeta_vacia_c)
+    print(f"Directorio eliminado {ruta_carpeta_vacia_c}")
+except FileNotFoundError: # es para file y directorios
+    print(f"El carpera {ruta_carpeta_vacia_c} no existe, no se puede eliminar.")
+except PermissionError:
+    print('No tienes permisos para eliminar/acc a esta acrpeta.')
+except OSError as e: # OSError es para errores relacionados con el sistema operativo, como intentar eliminar un directorio que no está vacío.
+    print('La carpeta que intentas eliminar no esta vacia.')
+
+
+#! Borrar una carpeta con contenido: shutil.rmtree(ruta_carpeta_eliminar_con_contenido)
